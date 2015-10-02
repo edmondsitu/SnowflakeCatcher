@@ -3,7 +3,8 @@ Snowflake[] cluster;
 void setup()
 {
   //your code here
-  size(300,300);
+  size(600,600);
+  background(0);
   cluster = new Snowflake[100];
   for(int i = 0; i < cluster.length; i++)
   {
@@ -13,22 +14,39 @@ void setup()
 void draw()
 {
   //your code here
-  background(0,0,0);
+  fill(0);
+  rect(0,500,600,100);
+  noFill();
+  stroke(0,100,255);
+  strokeWeight(2);
+  rect(mouseX-25, 530, 50,70);
+
   for(int i = 0; i < cluster.length; i++)
   {
-    cluster[i].show();
-    cluster[i].lookDown();
     cluster[i].erase();
+    cluster[i].lookDown();
     cluster[i].move();
     cluster[i].wrap();
+    cluster[i].show();
   }
 
 }
 void mouseDragged()
 {
   //your code here
-  noStroke();
-  ellipse(mouseX, mouseY, 10, 10);
+  if( mouseButton == LEFT)
+  {
+    fill(255,0,0);
+    noStroke();
+    ellipse(mouseX, mouseY, 20, 20);    
+  }
+  if( mouseButton == RIGHT)
+  {
+    fill(0);
+    noStroke();
+    ellipse(mouseX, mouseY, 100, 100);      
+  }
+
 
 }
 
@@ -37,37 +55,47 @@ class Snowflake
   //class member variable declarations
   int x;
   int y;
+  int eraseX;
+  int eraseY;
   boolean isMoving;
   Snowflake()
   {
     //class member variable initializations
-    x = (int)(Math.random()*300);
-    y = (int)(Math.random()*300);
+    x = (int)(Math.random()*600);
+    y = (int)(Math.random()*600);
     isMoving = true;
+    eraseX = 8;
+    eraseY = 8;
   }
   void show()
   {
     //your code here
-    fill(255,255,255);
+    noStroke();
+    fill(255);
     ellipse(x,y,5,5);
   }
   void lookDown()
   {
     //your code here
-    if( y > 0 && y < 350 && get(x,y+5) != color(0))
+    if(( y > 0 && y < 600 && get(x,y+3) != color(0)) && ( y > 0 && y < 600 && get(x,y+3) != color(255)))
     {
       isMoving = false;
+      eraseX = 2;
+      eraseY = 2;
     }
     else
     {
       isMoving = true;
+      eraseX = 8;
+      eraseY = 8;
     }
   }
   void erase()
   {
     //your code here
-    fill(255,0,0);
-    ellipse(mouseX,mouseY,7,7);
+    noStroke();
+    fill(0);
+    ellipse(x,y,eraseX,eraseY);
   }
   void move()
   {
@@ -80,10 +108,10 @@ class Snowflake
   void wrap()
   {
     //your code here
-    if( y > 294)
+    if( y > 594)
     {
       y = 0;
-      x = (int)(Math.random()*300);
+      x = (int)(Math.random()*600);
     }
   }
 }
