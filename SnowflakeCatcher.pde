@@ -14,12 +14,14 @@ void setup()
 void draw()
 {
   //your code here
+  /*
   fill(0);
   rect(0,500,600,100);
   noFill();
   stroke(0,100,255);
   strokeWeight(2);
   rect(mouseX-25, 530, 50,70);
+  */
 
   for(int i = 0; i < cluster.length; i++)
   {
