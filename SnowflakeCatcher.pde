@@ -79,7 +79,7 @@ class Snowflake
   void lookDown()
   {
     //your code here
-    if(( y > 0 && y < 600 && get(x,y+3) != color(0)) && ( y > 0 && y < 600 && get(x,y+3) != color(255)))
+    if( y > 0 && y < 600 && get(x,y+3) != color(0))
     {
       isMoving = false;
       eraseX = 2;
